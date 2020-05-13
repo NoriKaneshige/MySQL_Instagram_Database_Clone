@@ -156,5 +156,32 @@ mysql> DESC photo_tags;
 ```
 ## Loading Dataset, look at ig_clone_data.sql
 ![ig_clone_data](ig_clone_data.gif)
+## Instagram Challenge (1)
+![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+```
+```
+## Instagram Challenge (2)
+![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+```
+```
+## Instagram Challenge (3)
+![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+```
+```
+## Instagram Challenge (4)
+![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+```
+```
+## Instagram Challenge (5)
+![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+```
+```
+## Instagram Challenge (6)
+![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+```
+```
+## Instagram Challenge (7)
+![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+```
 ```
 
