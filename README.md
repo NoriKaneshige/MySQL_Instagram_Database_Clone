@@ -157,31 +157,171 @@ mysql> DESC photo_tags;
 ## Loading Dataset, look at ig_clone_data.sql
 ![ig_clone_data](ig_clone_data.gif)
 ## Instagram Database Challenge (1)
-![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+![instagram_challenge_1](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/instagram_challenge_1.png)
 ```
+mysql> SELECT *
+    -> FROM users
+    -> ORDER BY created_at
+    -> LIMIT 5;
++----+------------------+---------------------+
+| id | username         | created_at          |
++----+------------------+---------------------+
+| 80 | Darby_Herzog     | 2016-05-06 00:14:21 |
+| 67 | Emilio_Bernier52 | 2016-05-06 13:04:30 |
+| 63 | Elenor88         | 2016-05-08 01:30:41 |
+| 95 | Nicole71         | 2016-05-09 17:30:22 |
+| 38 | Jordyn.Jacobson2 | 2016-05-14 07:56:26 |
++----+------------------+---------------------+
+5 rows in set (0.12 sec)
 ```
 ## Instagram Database Challenge (2)
-![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+![instagram_challenge_2](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/instagram_challenge_2.png)
 ```
+mysql> SELECT
+    ->     DAYNAME(created_at) AS day,
+    ->     COUNT(*) AS total
+    -> FROM users
+    -> GROUP BY day
+    -> ORDER BY total DESC
+    -> LIMIT 2;
++----------+-------+
+| day      | total |
++----------+-------+
+| Thursday |    16 |
+| Sunday   |    16 |
++----------+-------+
+2 rows in set (0.03 sec)
 ```
 ## Instagram Database Challenge (3)
-![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+![instagram_challenge_3](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/instagram_challenge_3.png)
 ```
+mysql> SELECT username
+    -> FROM users
+    -> LEFT JOIN photos
+    ->     ON users.id = photos.user_id
+    -> WHERE photos.id IS NULL;
++---------------------+
+| username            |
++---------------------+
+| Aniya_Hackett       |
+| Bartholome.Bernhard |
+| Bethany20           |
+| Darby_Herzog        |
+| David.Osinski47     |
+| Duane60             |
+| Esmeralda.Mraz57    |
+| Esther.Zulauf61     |
+| Franco_Keebler64    |
+| Hulda.Macejkovic    |
+| Jaclyn81            |
+| Janelle.Nikolaus81  |
+| Jessyca_West        |
+| Julien_Schmidt      |
+| Kasandra_Homenick   |
+| Leslie67            |
+| Linnea59            |
+| Maxwell.Halvorson   |
+| Mckenna17           |
+| Mike.Auer39         |
+| Morgan.Kassulke     |
+| Nia_Haag            |
+| Ollie_Ledner37      |
+| Pearl7              |
+| Rocio33             |
+| Tierra.Trantow      |
++---------------------+
+26 rows in set (0.00 sec)
 ```
 ## Instagram Database Challenge (4)
-![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+![instagram_challenge_4](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/instagram_challenge_4.png)
 ```
+mysql> SELECT
+    ->     username,
+    ->     photos.id,
+    ->     photos.image_url,
+    ->     COUNT(*) AS total
+    -> FROM photos
+    -> INNER JOIN likes
+    ->     ON likes.photo_id = photos.id
+    -> INNER JOIN users
+    ->     ON photos.user_id = users.id
+    -> GROUP BY photos.id
+    -> ORDER BY total DESC
+    -> LIMIT 1;
++---------------+-----+---------------------+-------+
+| username      | id  | image_url           | total |
++---------------+-----+---------------------+-------+
+| Zack_Kemmer93 | 145 | https://jarret.name |    48 |
++---------------+-----+---------------------+-------+
+1 row in set (0.16 sec)
 ```
 ## Instagram Database Challenge (5)
-![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+![instagram_challenge_5](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/instagram_challenge_5.png)
 ```
+mysql> SELECT (SELECT
+    ->     COUNT(*)
+    ->   FROM photos)
+    ->   / (SELECT
+    ->     COUNT(*)
+    ->   FROM users)
+    ->   AS avg;
++--------+
+| avg    |
++--------+
+| 2.5700 |
++--------+
+1 row in set (0.06 sec)
 ```
 ## Instagram Database Challenge (6)
-![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+![instagram_challenge_6](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/instagram_challenge_6.png)
 ```
+mysql> SELECT tags.tag_name,
+    ->        Count(*) AS total
+    -> FROM   photo_tags
+    ->        JOIN tags
+    ->          ON photo_tags.tag_id = tags.id
+    -> GROUP  BY tags.id
+    -> ORDER  BY total DESC
+    -> LIMIT  5;
++----------+-------+
+| tag_name | total |
++----------+-------+
+| smile    |    59 |
+| beach    |    42 |
+| party    |    39 |
+| fun      |    38 |
+| lol      |    24 |
++----------+-------+
+5 rows in set (0.00 sec)
 ```
 ## Instagram Database Challenge (7)
-![](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/.png)
+![instagram_challenge_7](https://github.com/NoriKaneshige/MySQL_Instagram_Database_Clone/blob/master/instagram_challenge_7.png)
 ```
+mysql> SELECT username,
+    ->        Count(*) AS num_likes
+    -> FROM   users
+    ->        INNER JOIN likes
+    ->                ON users.id = likes.user_id
+    -> GROUP  BY likes.user_id
+    -> HAVING num_likes = (SELECT Count(*)
+    ->                     FROM   photos);
++--------------------+-----------+
+| username           | num_likes |
++--------------------+-----------+
+| Aniya_Hackett      |       257 |
+| Jaclyn81           |       257 |
+| Rocio33            |       257 |
+| Maxwell.Halvorson  |       257 |
+| Ollie_Ledner37     |       257 |
+| Mckenna17          |       257 |
+| Duane60            |       257 |
+| Julien_Schmidt     |       257 |
+| Mike.Auer39        |       257 |
+| Nia_Haag           |       257 |
+| Leslie67           |       257 |
+| Janelle.Nikolaus81 |       257 |
+| Bethany20          |       257 |
++--------------------+-----------+
+13 rows in set (0.01 sec)
 ```
 
