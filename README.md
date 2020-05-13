@@ -154,5 +154,7 @@ mysql> DESC photo_tags;
 +----------+---------+------+-----+---------+-------+
 2 rows in set (0.03 sec)
 ```
-
+## Loading Dataset, look at ig_clone_data.sql
+[ig-clone-data](ig-clone-data.gif)
+```
 
